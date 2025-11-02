@@ -62,13 +62,16 @@ let renderProducts = () => {
                     productHTML = productHTML.replaceAll("[PRODUCT.PRICE]", product.price);
                     productHTML = productHTML.replaceAll("[PRODUCT.IMGURL]", product.imagurl);
                     productHTML = productHTML.replaceAll('[PRODUCT.CATEGORY_ID]', product.category_id);
+                    productHTML = productHTML.replaceAll("[PRODUCT.PRODUCTURL]", product.producturl);
 
                     container.innerHTML+=productHTML
                     
                 })
             }
 
-            else{}
+            else{
+                
+            }
 
 
 
