@@ -87,12 +87,32 @@ let renderCategories = () => {
         awaitfetchCategories('https://data-dawm.github.io/datum/reseller/categories.xml')
         .then(result => {
             if (result.success) {
-                 let container = document.getElementById("products-container")
-                container.innerHTML = `<option selected disabled>Seleccione una categoría</option>`;
+                 let container = document.getElementById("categories") 
+                 container.innerHTML = `<option selected disabled>Seleccione una categoría</option>`;
+
+                 let categoriesXML = result.body;
+                 let categories = categoriesXML.getElementByTagName("category")
+
+                 for (let category of categories) { /* bloque for */
+
+                    let ID = category.getElementByTagName("id")[0].textContent;
+                    let NAME = category.getElementByTagName("name")[0].textContent;
+                    let categoryHTML = `<option value="${ID}">${NAME}</option>`;
+
+                    container.innerHTML += categoryHTML
+                  }
+               
+            }
+            else{
+                alert("Erro al obtener las categorías")
             }        
 
         })
-    } catch (error) { /* bloque catch */ }
+    } catch (error) { /* bloque catch */ 
+
+        alert("Hubp un error al cargar las categorias")
+
+    }
     
 }
 
@@ -100,4 +120,5 @@ let renderCategories = () => {
     showToast();
     showVideo();
     renderProducts();
+    renderCategories();
 })();
