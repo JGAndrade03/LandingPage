@@ -1,5 +1,8 @@
 "use strict";
 import { fetchProducts } from "./functions";
+import { fetchCategories} from "./functions";
+
+
 (() => {
     alert("¡Bienvenido a la página!");
     console.log("Mensaje de bienvenida mostrado.");
@@ -71,11 +74,26 @@ let renderProducts = () => {
 
             else{
                 
+                alert("No ha sido psible cargar los elementos...")
             }
 
 
 
     })
+}
+
+let renderCategories = () => {
+    try { /* bloque try */ 
+        awaitfetchCategories('https://data-dawm.github.io/datum/reseller/categories.xml')
+        .then(result => {
+            if (result.success) {
+                 let container = document.getElementById("products-container")
+                container.innerHTML = `<option selected disabled>Seleccione una categoría</option>`;
+            }        
+
+        })
+    } catch (error) { /* bloque catch */ }
+    
 }
 
 (() => {
